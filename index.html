@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fragments of Abundance</title>
+<meta name="description" content="A collaborative archive of fragments — exploring what becomes valuable when creation becomes abundant.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald: #339933;
+    --lush: #00cc33;
+    --fresh: #99ffcc;
+    --sunny: #ff9933;
+    --bloom: #cc66ff;
+    --nectar: #990066;
+    --shade: #3300cc;
+    --ink: #1a2b1a;
+    --paper: #fcfffc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  }
+  header {
+    text-align: center;
+    padding: 3.5rem 1rem 2rem;
+  }
+  header img { width: 110px; height: 110px; }
+  h1 {
+    font-family: 'Comfortaa', sans-serif;
+    color: var(--emerald);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    margin-top: .75rem;
+  }
+  .tagline {
+    max-width: 34em;
+    margin: .9rem auto 0;
+    font-size: 1.05rem;
+    color: #446644;
+  }
+  .tagline em { color: var(--emerald); font-style: normal; font-weight: 700; }
+  .notice {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--nectar);
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    padding: .3rem .9rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-auto-rows: 160px;
+    grid-auto-flow: dense;
+    gap: 10px;
+    padding: 10px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .frag {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    transition: transform .18s ease;
+    cursor: default;
+  }
+  .frag:hover { transform: scale(.975); }
+  .aw { grid-column: span 2; grid-row: span 2; }
+  @media (max-width: 380px) { .aw { grid-column: span 1; } }
+  .type {
+    position: absolute;
+    top: .6rem;
+    left: .8rem;
+    font-size: .62rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .75;
+  }
+  .frag p {
+    font-size: .92rem;
+    line-height: 1.45;
+  }
+  .aw p { font-size: 1.15rem; max-width: 20em; }
+  .aw .badge {
+    position: absolute;
+    bottom: .7rem;
+    right: .9rem;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    font-size: .72rem;
+    background: rgba(255,255,255,.85);
+    color: var(--emerald);
+    border-radius: 999px;
+    padding: .3rem .8rem;
+  }
+  .wave { display: flex; align-items: center; gap: 3px; height: 40px; margin-top: .6rem; }
+  .wave i { flex: 1; background: currentColor; opacity: .65; border-radius: 2px; }
+  .glyph {
+    position: absolute;
+    inset: 0;
+    background: url('assets/logogram.png') center/55% no-repeat;
+    opacity: .16;
+    filter: grayscale(1) brightness(3);
+  }
+  footer {
+    text-align: center;
+    padding: 3rem 1rem 4rem;
+    color: #446644;
+    font-size: .9rem;
+  }
+  footer a { color: var(--emerald); font-weight: 700; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="assets/logogram.png" alt="Fragments of Abundance logogram">
+  <h1>Fragments of Abundance</h1>
+  <p class="tagline">A collaborative archive of small creative acts. <em>What becomes valuable when creation becomes abundant?</em> Fragments are placed, answered, and combined — until they find one another.</p>
+  <span class="notice">Placeholder preview — sample fragments only</span>
+</header>
+
+<main class="grid" id="grid" aria-label="Endless field of fragments"></main>
+
+<footer>
+  The archive opens soon. Every refresh rearranges the field — no fragment is above another.<br>
+  <a href="mailto:fragmentsofabundance@gmail.com">fragmentsofabundance@gmail.com</a>
+</footer>
+
+<script>
+const PALETTES = [
+  { bg: '#339933', fg: '#ffffff' },  // emerald
+  { bg: '#00cc33', fg: '#ffffff' },  // lush
+  { bg: '#99ffcc', fg: '#1a5c1a' },  // fresh
+  { bg: '#ff9933', fg: '#4d2600' },  // sunny
+  { bg: '#cc66ff', fg: '#33004d' },  // bloom
+  { bg: '#990066', fg: '#ffe6f5' },  // nectar
+  { bg: '#3300cc', fg: '#e6e6ff' }   // shade
+];
+
+const TEXTS = [
+  'I place it down. A small thing, but mine.',
+  'The handshake between fragments.',
+  'A memory leak, running backwards into history.',
+  'Not finished. Still worth placing.',
+  'A voice note from the night market.',
+  'Someone answered my sketch with a song.',
+  'Creation is abundant. Attention is a gift.',
+  'A prompt, waiting for its second author.',
+  'The archive remembers what the feed forgets.',
+  'Two strangers, one drawing, three versions.',
+  'Sent from a phone with a cracked screen.',
+  'What remains when making is easy?',
+  'A fragment does not need permission.',
+  'Local signal, global reach.',
+  'This one is for whoever finds it.',
+  'An observation: the kids remix faster than we archive.'
+];
+
+const AW_TEXTS = [
+  'Assembled from nine fragments by four contributors.',
+  'A collaborative video grown from a single voice note.',
+  'Fragments that found one another across three cities.',
+  'Built in public, owned by everyone who touched it.'
+];
+
+const TYPES = ['image', 'text', 'voice', 'sketch', 'prompt', 'video'];
+
+const shuffle = a => {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
+let count = 0;
+function makeFragment() {
+  count++;
+  const isAW = count % 11 === 0;              // AWs surface as larger landmarks
+  const pal = pick(PALETTES);
+  const el = document.createElement('article');
+  el.className = 'frag' + (isAW ? ' aw' : '');
+  el.style.background = pal.bg;
+  el.style.color = pal.fg;
+
+  const type = isAW ? 'assembled work' : pick(TYPES);
+  let inner = `<span class="type">${type}</span>`;
+
+  if (isAW) {
+    inner += `<span class="glyph"></span><p>${pick(AW_TEXTS)}</p><span class="badge">Assembled Work</span>`;
+  } else if (type === 'voice') {
+    const bars = Array.from({ length: 24 },
+      () => `<i style="height:${8 + Math.floor(Math.random() * 32)}px"></i>`).join('');
+    inner += `<p>${pick(TEXTS)}</p><div class="wave" aria-hidden="true">${bars}</div>`;
+  } else if (type === 'image' || type === 'video' || type === 'sketch') {
+    inner += `<span class="glyph"></span><p>${pick(TEXTS)}</p>`;
+  } else {
+    inner += `<p>${pick(TEXTS)}</p>`;
+  }
+  el.innerHTML = inner;
+  return el;
+}
+
+const grid = document.getElementById('grid');
+function addBatch(n = 24) {
+  const frags = shuffle(Array.from({ length: n }, makeFragment));
+  frags.forEach(f => grid.appendChild(f));
+}
+
+addBatch(36);                                  // initial field, shuffled per refresh
+
+// Endless scroll
+const sentinel = document.createElement('div');
+grid.after(sentinel);
+new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) addBatch();
+}, { rootMargin: '900px' }).observe(sentinel);
+</script>
+
+</body>
+</html>
