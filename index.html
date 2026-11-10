@@ -1,238 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fragments of Abundance</title>
-<meta name="description" content="A collaborative archive of fragments — exploring what becomes valuable when creation becomes abundant.">
-<link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --emerald: #339933;
-    --lush: #00cc33;
-    --fresh: #99ffcc;
-    --sunny: #ff9933;
-    --bloom: #cc66ff;
-    --nectar: #990066;
-    --shade: #3300cc;
-    --ink: #1a2b1a;
-    --paper: #fcfffc;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
-  }
-  header {
-    text-align: center;
-    padding: 3.5rem 1rem 2rem;
-  }
-  header img { width: 110px; height: 110px; }
-  h1 {
-    font-family: 'Comfortaa', sans-serif;
-    color: var(--emerald);
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    font-weight: 700;
-    margin-top: .75rem;
-  }
-  .tagline {
-    max-width: 34em;
-    margin: .9rem auto 0;
-    font-size: 1.05rem;
-    color: #446644;
-  }
-  .tagline em { color: var(--emerald); font-style: normal; font-weight: 700; }
-  .notice {
-    display: inline-block;
-    margin-top: 1.2rem;
-    font-size: .8rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--nectar);
-    border: 1px solid currentColor;
-    border-radius: 999px;
-    padding: .3rem .9rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    grid-auto-rows: 160px;
-    grid-auto-flow: dense;
-    gap: 10px;
-    padding: 10px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  .frag {
-    border-radius: 14px;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 1rem;
-    transition: transform .18s ease;
-    cursor: default;
-  }
-  .frag:hover { transform: scale(.975); }
-  .aw { grid-column: span 2; grid-row: span 2; }
-  @media (max-width: 380px) { .aw { grid-column: span 1; } }
-  .type {
-    position: absolute;
-    top: .6rem;
-    left: .8rem;
-    font-size: .62rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    opacity: .75;
-  }
-  .frag p {
-    font-size: .92rem;
-    line-height: 1.45;
-  }
-  .aw p { font-size: 1.15rem; max-width: 20em; }
-  .aw .badge {
-    position: absolute;
-    bottom: .7rem;
-    right: .9rem;
-    font-family: 'Comfortaa', sans-serif;
-    font-weight: 700;
-    font-size: .72rem;
-    background: rgba(255,255,255,.85);
-    color: var(--emerald);
-    border-radius: 999px;
-    padding: .3rem .8rem;
-  }
-  .wave { display: flex; align-items: center; gap: 3px; height: 40px; margin-top: .6rem; }
-  .wave i { flex: 1; background: currentColor; opacity: .65; border-radius: 2px; }
-  .glyph {
-    position: absolute;
-    inset: 0;
-    background: url('assets/logogram.png') center/55% no-repeat;
-    opacity: .16;
-    filter: grayscale(1) brightness(3);
-  }
-  footer {
-    text-align: center;
-    padding: 3rem 1rem 4rem;
-    color: #446644;
-    font-size: .9rem;
-  }
-  footer a { color: var(--emerald); font-weight: 700; text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#160f20">
+  <meta name="description" content="Fragments of Abundance archive design draft.">
+  <title>Fragments of Abundance</title>
+  <link rel="icon" href="assets/brand/foa-logogram.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="fragment-store.js" defer></script>
+  <script src="entry.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body>
+  <a id="skip-main" class="skip-link" href="#archive">Skip to fragments</a>
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Fragments of Abundance home">
+        <img src="assets/brand/foa-landscape.png" width="760" height="380" alt="Fragments of Abundance">
+      </a>
+      <nav aria-label="Main navigation">
+        <button id="about-button" type="button">About</button>
+        <a id="create-link" href="?view=create">Create fragment</a>
+      </nav>
+    </header>
 
-<header>
-  <img src="assets/logogram.png" alt="Fragments of Abundance logogram">
-  <h1>Fragments of Abundance</h1>
-  <p class="tagline">A collaborative archive of small creative acts. <em>What becomes valuable when creation becomes abundant?</em> Fragments are placed, answered, and combined — until they find one another.</p>
-  <span class="notice">Placeholder preview — sample fragments only</span>
-</header>
+    <main id="archive" tabindex="-1">
+      <h1 class="sr-only">Browse the archive</h1>
+      <div class="archive-toolbar" role="group" aria-label="Archive controls">
+        <button type="button" data-filter="all" aria-pressed="false">All</button>
+        <button type="button" data-filter="fragment" aria-pressed="true">Fragments</button>
+        <button type="button" data-filter="assembly" aria-pressed="false">Assemblies</button>
+        <button id="shuffle-button" type="button">Shuffle</button>
+        <button id="top-button" type="button">Back to top</button>
+      </div>
+      <div id="grid" class="grid" aria-label="Fragment archive"></div>
+      <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+      <noscript><p>This archive preview needs JavaScript to display the fragments.</p></noscript>
+    </main>
+    <main id="entry-page" class="entry-page" tabindex="-1" hidden>
+      <h1>Create fragment</h1>
+      <form id="fragment-form" class="entry-form">
+        <label>Title <input name="title" maxlength="120" required></label>
+        <label>Description <textarea name="description" rows="5"></textarea></label>
+        <label id="type-field">Media type
+          <select name="type">
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+            <option value="model">3D model</option>
+            <option value="pdf">PDF</option>
+            <option value="audio">Audio</option>
+            <option value="link">Web link</option>
+            <option value="assembly" hidden>Assembly</option>
+          </select>
+        </label>
+        <label id="media-field"><span id="media-label">Image file</span>
+          <input name="media" type="file" accept="image/png,image/jpeg,image/webp,image/avif,image/gif" aria-describedby="media-hint" required>
+          <small id="media-hint">PNG, JPEG, WebP, AVIF or GIF.</small>
+        </label>
+        <label id="link-field" hidden>Web address
+          <input name="webUrl" type="url" placeholder="https://example.com" disabled>
+        </label>
+        <label id="thumbnail-field" hidden><span id="thumbnail-label">Thumbnail</span>
+          <input name="thumbnail" type="file" accept="image/png,image/jpeg,image/webp,image/avif,image/gif">
+        </label>
+        <div class="thumbnail-options">
+          <label>Thumbnail crop
+            <select name="thumbnailCrop">
+              <option value="original">Original</option>
+              <option value="square">Square</option>
+              <option value="landscape">Landscape (3:2)</option>
+              <option value="portrait">Portrait (3:4)</option>
+              <option value="current" hidden>Current crop</option>
+            </select>
+          </label>
+          <label>Thumbnail width
+            <select name="thumbnailSpan">
+              <option value="1">1 column</option>
+              <option value="2">2 columns</option>
+              <option value="3">3 columns</option>
+            </select>
+          </label>
+        </div>
+        <details id="entry-related" class="entry-related">
+          <summary>Related fragments</summary>
+          <div id="entry-related-options" role="group" aria-label="Related fragments"></div>
+        </details>
+        <div class="entry-actions">
+          <button class="save-fragment" type="submit">Save fragment</button>
+          <a href="index.html">Back to archive</a>
+        </div>
+        <p id="entry-status" class="entry-status" role="status" hidden></p>
+        <small class="entry-hint">Entries are saved in this browser.</small>
+      </form>
+    </main>
+  </div>
 
-<main class="grid" id="grid" aria-label="Endless field of fragments"></main>
-
-<footer>
-  The archive opens soon. Every refresh rearranges the field — no fragment is above another.<br>
-  <a href="mailto:fragmentsofabundance@gmail.com">fragmentsofabundance@gmail.com</a>
-</footer>
-
-<script>
-const PALETTES = [
-  { bg: '#339933', fg: '#ffffff' },  // emerald
-  { bg: '#00cc33', fg: '#ffffff' },  // lush
-  { bg: '#99ffcc', fg: '#1a5c1a' },  // fresh
-  { bg: '#ff9933', fg: '#4d2600' },  // sunny
-  { bg: '#cc66ff', fg: '#33004d' },  // bloom
-  { bg: '#990066', fg: '#ffe6f5' },  // nectar
-  { bg: '#3300cc', fg: '#e6e6ff' }   // shade
-];
-
-const TEXTS = [
-  'I place it down. A small thing, but mine.',
-  'The handshake between fragments.',
-  'A memory leak, running backwards into history.',
-  'Not finished. Still worth placing.',
-  'A voice note from the night market.',
-  'Someone answered my sketch with a song.',
-  'Creation is abundant. Attention is a gift.',
-  'A prompt, waiting for its second author.',
-  'The archive remembers what the feed forgets.',
-  'Two strangers, one drawing, three versions.',
-  'Sent from a phone with a cracked screen.',
-  'What remains when making is easy?',
-  'A fragment does not need permission.',
-  'Local signal, global reach.',
-  'This one is for whoever finds it.',
-  'An observation: the kids remix faster than we archive.'
-];
-
-const AW_TEXTS = [
-  'Assembled from nine fragments by four contributors.',
-  'A collaborative video grown from a single voice note.',
-  'Fragments that found one another across three cities.',
-  'Built in public, owned by everyone who touched it.'
-];
-
-const TYPES = ['image', 'text', 'voice', 'sketch', 'prompt', 'video'];
-
-const shuffle = a => {
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-};
-const pick = a => a[Math.floor(Math.random() * a.length)];
-
-let count = 0;
-function makeFragment() {
-  count++;
-  const isAW = count % 11 === 0;              // AWs surface as larger landmarks
-  const pal = pick(PALETTES);
-  const el = document.createElement('article');
-  el.className = 'frag' + (isAW ? ' aw' : '');
-  el.style.background = pal.bg;
-  el.style.color = pal.fg;
-
-  const type = isAW ? 'assembled work' : pick(TYPES);
-  let inner = `<span class="type">${type}</span>`;
-
-  if (isAW) {
-    inner += `<span class="glyph"></span><p>${pick(AW_TEXTS)}</p><span class="badge">Assembled Work</span>`;
-  } else if (type === 'voice') {
-    const bars = Array.from({ length: 24 },
-      () => `<i style="height:${8 + Math.floor(Math.random() * 32)}px"></i>`).join('');
-    inner += `<p>${pick(TEXTS)}</p><div class="wave" aria-hidden="true">${bars}</div>`;
-  } else if (type === 'image' || type === 'video' || type === 'sketch') {
-    inner += `<span class="glyph"></span><p>${pick(TEXTS)}</p>`;
-  } else {
-    inner += `<p>${pick(TEXTS)}</p>`;
-  }
-  el.innerHTML = inner;
-  return el;
-}
-
-const grid = document.getElementById('grid');
-function addBatch(n = 24) {
-  const frags = shuffle(Array.from({ length: n }, makeFragment));
-  frags.forEach(f => grid.appendChild(f));
-}
-
-addBatch(36);                                  // initial field, shuffled per refresh
-
-// Endless scroll
-const sentinel = document.createElement('div');
-grid.after(sentinel);
-new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting) addBatch();
-}, { rootMargin: '900px' }).observe(sentinel);
-</script>
-
+  <dialog id="preview" aria-labelledby="preview-title">
+    <div class="dialog-bar">
+      <span id="preview-heading"></span>
+      <div class="dialog-tools">
+        <span id="preview-authoring" hidden>
+          <a id="edit-fragment" aria-label="Edit fragment">Edit</a>
+          <button id="delete-fragment" type="button" aria-label="Delete fragment">Delete</button>
+        </span>
+        <button class="close-button" id="close-preview" type="button" aria-label="Close preview" autofocus>Close <span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+    <div id="preview-scroll" class="preview-scroll" tabindex="0" role="region" aria-label="Fragment details">
+      <p id="preview-action-status" class="preview-action-status" role="status" hidden></p>
+      <div id="preview-content"></div>
+    </div>
+  </dialog>
+  <dialog id="about" class="about-dialog" aria-labelledby="about-title">
+    <div class="dialog-bar"><span>FoA</span><button class="close-button" id="close-about" type="button" aria-label="Close about">Close <span aria-hidden="true">×</span></button></div>
+    <div class="about-content">
+      <img src="assets/brand/foa-logogram.png" width="56" height="56" alt="">
+      <h2 id="about-title">Fragments of Abundance</h2>
+      <p>A collaborative project by Rimbawan Gerilya, commissioned by M+.</p>
+      <p>People contribute creative fragments, respond to each other, and assemble new works.</p>
+      <small>Sample fragments use AI-generated placeholder images.</small>
+    </div>
+  </dialog>
 </body>
 </html>
